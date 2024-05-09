@@ -2,8 +2,8 @@ project "ImGui"
     language "C++"
     kind "StaticLib"
     
-    targetdir "bin/"..outputdir.."/%{prj.name}"
-    objdir "bin-int/"..outputdir.."/%{prj.name}"
+    targetdir ("bin/"..outputdir.."/%{prj.name}")
+    objdir ("bin-int/"..outputdir.."/%{prj.name}")
 
     files
     {
@@ -17,13 +17,23 @@ project "ImGui"
         "imgui_widgets.cpp",
         "imstb_rectpack.h",
         "imstc_textedit.h",
-        "imstb_truetype.h"
+        "imstb_truetype.h",
+        "backends/imgui_impl_opengl3.cpp",
+        "backends/imgui_impl_opengl3.h",
+        "backends/imgui_impl_glfw.h",
+        "backends/imgui_impl_glfw.cpp"
+    }
+
+    includedirs
+    {
+        "",
+        "../GLFW/src/glfw-3.4/include"
     }
 
     filter "system:windows"
         cppdialect "C++17"
         systemversion "latest"
-        staticruntime "Om"
+        staticruntime "On"
 
     filter ("system:windows", "configurations:Debug")
         buildoptions "/MTd"
